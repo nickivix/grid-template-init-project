@@ -1,0 +1,111 @@
+@use "../../presets" as *;
+@use "../../mixins" as *;
+
+.header-navbar {
+  @include md {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    width: 30px;
+    height: 22.5px;
+    position: relative;
+    margin: $gap 0;
+    transform: rotate(0deg);
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+
+    @include md-min {
+      display: none;
+    }
+
+    &-row {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: $color-light;
+      border-radius: 3px;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: 0.25s ease-in-out;
+
+      &:nth-child(1) {
+        top: 0px;
+        transform-origin: left center;
+      }
+      &:nth-child(2) {
+        top: 9px;
+        transform-origin: left center;
+      }
+      &:nth-child(3) {
+        top: 18px;
+        transform-origin: left center;
+      }
+    }
+
+    &--active span {
+      &:nth-child(1) {
+        transform: rotate(45deg);
+        top: -3px;
+        left: 4px;
+      }
+      &:nth-child(2) {
+        width: 0%;
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 18.5px;
+        left: 4px;
+      }
+    }
+  }
+
+  &__list {
+    @include md-min {
+      gap: $gap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(50px, max-content));
+      justify-content: end;
+      @include unlist(0 -10px 0);
+    }
+    @include md {
+      display: none;
+      text-align: right;
+      @include unlist;
+      @include box-shadow;
+      background-color: rgba($color-gray-dark, 0.5);
+
+      position: absolute;
+      top: 100%;
+      right: $gap;
+    }
+  }
+
+  &__item {
+    @include md {
+      margin: $gap;
+    }
+  }
+
+  &__link {
+    display: block;
+    font-size: 1.125rem;
+    letter-spacing: 0.1em;
+    transition: color 0.25s;
+
+    @include md-min {
+      padding: $gap $gap-sm;
+    }
+    @include md {
+      padding: $gap-sm $gap;
+    }
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+}
